@@ -1,0 +1,29 @@
+[project]
+name = "coat2pycsw"
+version = "0.1.0"
+description = "Popylate PyCSW using data from the COAT CKAN catalog"
+authors = [
+    {name = "Francesco Frassinelli", email = "francesco.frassinelli@nina.no"},
+]
+dependencies = [
+    "pygeometa>=0.13.1",
+    "pycsw>=2.6.1",
+    "setuptools>=65.6.0",
+    "sqlalchemy>=1.4.44",
+    "requests>=2.28.1",
+    "shapely>=1.8.5.post1",
+]
+requires-python = ">=3.8"
+license = {text = "GPLv3"}
+[project.optional-dependencies]
+prod = [
+    "gunicorn>=20.1.0",
+]
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
+[tool.pdm.dev-dependencies]

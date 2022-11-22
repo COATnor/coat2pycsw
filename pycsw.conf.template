@@ -1,0 +1,68 @@
+[server]
+home=${PWD}
+url=${PYCSW_URL}
+mimetype=application/xml; charset=UTF-8
+encoding=UTF-8
+language=en-US
+maxrecords=10
+#loglevel=DEBUG
+#logfile=/tmp/pycsw.log
+#ogc_schemas_base=http://foo
+#federatedcatalogues=http://catalog.data.gov/csw
+#pretty_print=true
+gzip_compresslevel=9
+#domainquerytype=range
+#domaincounts=true
+#spatial_ranking=true
+profiles=apiso
+
+[manager]
+transactions=false
+allowed_ips=127.0.0.1
+#csw_harvest_pagesize=10
+
+[metadata:main]
+identification_title=COAT Geospatial Catalogue
+identification_abstract=COAT OGC CSW server powered by pycsw
+identification_keywords=coat,catalogue,discovery,metadata
+#identification_keywords_type=theme
+identification_fees=None
+identification_accessconstraints=None
+provider_name=COAT
+provider_url=https://coat.no/
+contact_name=Francesco Frassinelli
+#contact_position=Position Title
+#contact_address=Mailing Address
+#contact_city=Trondheim
+#contact_stateorprovince=Administrative Area
+#contact_postalcode=Zip or Postal Code
+contact_country=Norway
+#contact_phone=+xx-xxx-xxx-xxxx
+#contact_fax=+xx-xxx-xxx-xxxx
+contact_email=francsco.frassinelli@nina.no
+#contact_url=Contact URL
+#contact_hours=Hours of Service
+#contact_instructions=During hours of service.  Off on weekends.
+contact_role=pointOfContact
+
+[repository]
+# sqlite
+database=sqlite:///${PWD}/cite.db
+# postgres
+#database=postgresql://username:password@localhost/pycsw
+# mysql
+#database=mysql://username:password@localhost/pycsw?charset=utf8
+#mappings=path/to/mappings.py
+table=records
+#filter=type = 'http://purl.org/dc/dcmitype/Dataset'
+
+#[metadata:inspire]
+#enabled=true
+#languages_supported=eng,gre
+#default_language=eng
+#date=YYYY-MM-DD
+#gemet_keywords=Utility and governmental services
+#conformity_service=notEvaluated
+#contact_name=Organization Name
+#contact_email=Email Address
+#temp_extent=YYYY-MM-DD/YYYY-MM-DD
