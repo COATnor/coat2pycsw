@@ -95,7 +95,7 @@ def main():
             },
             "contact": {
                 "pointOfContact": {
-                    "email": dataset["author"],
+                    "individualname": dataset["author"],
                     "email": dataset["author_email"],
                 },
             },
