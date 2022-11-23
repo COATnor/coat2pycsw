@@ -14,7 +14,7 @@ URL = os.getenv("COAT_URL", "https://data.coat.no/")
 
 
 def get_datasets(url):
-    package_search = urljoin(url, "/api/3/action/package_search")
+    package_search = urljoin(url, "api/3/action/package_search")
     res = requests.get(package_search, params={"rows": 0})
     end = res.json()["result"]["count"]
     rows = 10
@@ -50,6 +50,7 @@ def main():
     repo = repository.Repository(database, context, table=table_name)
 
     for dataset in get_datasets(URL):
+        dataset_url = urljoin(URL, "dataset/" + dataset["name"] + "/")
         dataset_metadata = {
             "mcf": {"version": 1.0},
             "metadata": {
@@ -57,11 +58,11 @@ def main():
                 "language": "en",
                 "charset": "utf8",
                 "datestamp": dataset["metadata_modified"],
-                "dataseturi": dataset["url"],
+                "dataseturi": dataset_url,
             },
             "spatial": {"datatype": "vector", "geomtype": "point"},
             "identification": {
-                "language": "eng",
+                "language": "en",
                 "charset": "utf8",
                 "title": {"en": dataset["title"]},
                 "abstract": {"en": dataset["notes"]},
@@ -89,7 +90,7 @@ def main():
                 "rights": {
                     "en": dataset["resource_citations"],
                 },
-                "url": dataset["url"],
+                "url": dataset_url,
                 "status": "onGoing",
                 "maintenancefrequency": "continual",
             },
@@ -106,13 +107,13 @@ def main():
                 },
             },
             "distribution": {
-                "waf": {
-                    "url": dataset["url"],
+                "en": {
+                    "url": urljoin(dataset_url, "zip"),
                     "type": "WWW:LINK",
                     "rel": "canonical",
-                    "name": "my waf",
+                    "name": "ZIP-compressed dataset\"" + dataset["name"] + "\"",
                     "description": {
-                        "en": "description in English",
+                        "en": "ZIP-compressed dataset\"" + dataset["name"] + "\"",
                     },
                     "function": "download",
                 }
