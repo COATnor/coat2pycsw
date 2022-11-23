@@ -6,6 +6,13 @@ services:
       dockerfile: Dockerfile
     environment:
       PYCSW_URL: http://localhost:8080/pycsw/csw.py
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO
+      - /dev/null
+      - http://localhost:8000/pycsw/csw.py
     image: ghcr.io/coatnor/coat2pycsw:main
     networks:
       default: null
