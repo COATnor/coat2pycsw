@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     environment:
       COAT_URL: https://data.coat.no/
-      PYCSW_URL: http://localhost:8080/pycsw/csw.py
+      PYCSW_URL: http://localhost:8080/csw.py
     healthcheck:
       test:
       - CMD
