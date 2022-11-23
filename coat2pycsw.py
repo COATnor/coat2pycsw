@@ -34,6 +34,34 @@ def get_bbox(dataset):
     return shape(json.loads(extra["value"])).bounds
 
 
+coat2iso19115_topiccategory_mapping = {
+    "Biota": "biota",
+    "Boundaries": "boundaries",
+    "Climatology": "climatologyMeteorologyAtmosphere",
+    "Economy": "economy",
+    "Elevation": "elevation",
+    "Environment": "environment",
+    "Farming": "farming",
+    "Geoscientific": "geoscientificInformation",
+    "Health": "health",
+    "Imagery": "imageryBaseMapsEarthCover",
+    "Inland_Waters": "inlandWaters",
+    "Intelligence": "intelligenceMilitary",
+    "Location": "location",
+    "Oceans": "oceans",
+    "Planning": "planningCadastre",
+    "Society": "society",
+    "Structure": "structure",
+    "Transportation": "transportation",
+    "utilities": "utilitiesCommunication",
+}
+
+
+def coat2iso19115_topiccategory(category):
+    """Compatibility workaround for old COAT topic category values"""
+    return coat2iso19115_topiccategory_mapping.get(category, category)
+
+
 def main():
     pycsw_config = ConfigParser()
     pycsw_config.read_file(open("pycsw.conf"))
@@ -75,7 +103,9 @@ def main():
                         }
                     }
                 },
-                "topiccategory": [dataset["topic_category"]],
+                "topiccategory": [
+                    coat2iso19115_topiccategory(dataset["topic_category"])
+                ],
                 "extents": {
                     "spatial": [{"bbox": get_bbox(dataset), "crs": 4326}],
                     "temporal": [
