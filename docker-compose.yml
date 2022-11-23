@@ -1,0 +1,19 @@
+name: coat2pycsw
+services:
+  pycsw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PYCSW_URL: http://localhost:8080/pycsw/csw.py
+    image: ghcr.io/coatnor/coat2pycsw:main
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8000
+      published: "8000"
+      protocol: tcp
+networks:
+  default:
+    name: coat2pycsw_default
