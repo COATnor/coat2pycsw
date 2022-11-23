@@ -135,15 +135,19 @@ def main():
                     "positionname": "Senior engineer IT",
                     "url": "https://www.nina.no/english/Contact/Employees/Employee-info?AnsattID=15958",
                 },
+                "CI_ResponsibleParty": {
+                    "individualname": dataset["author"],
+                    "email": dataset["author_email"],
+                }
             },
             "distribution": {
                 "en": {
                     "url": urljoin(dataset_url, "zip"),
                     "type": "WWW:LINK",
                     "rel": "canonical",
-                    "name": "ZIP-compressed dataset\"" + dataset["name"] + "\"",
+                    "name": 'ZIP-compressed dataset"' + dataset["name"] + '"',
                     "description": {
-                        "en": "ZIP-compressed dataset\"" + dataset["name"] + "\"",
+                        "en": 'ZIP-compressed dataset"' + dataset["name"] + '"',
                     },
                     "function": "download",
                 }
@@ -157,5 +161,6 @@ def main():
         record = metadata.parse_record(context, xml_string, repo)[0]
         repo.insert(record, "local", util.get_today_and_now())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
