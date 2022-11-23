@@ -4,6 +4,33 @@ In order to do that, coat2pycsw reads the data from [data.coat.no](https://data.
 
 # How to build and run
 
+## Without Docker
+
+Dependencies:
+```bash
+python3 -m pip install --user pipx
+pipx install pdm
+pdm install --no-self
+```
+
+Configuration:
+```bash
+PYCSW_URL=http://localhost:8000 envsubst < pycsw.conf.template > pycsw.conf
+```
+
+Generate database:
+```bash
+rm -f cite.db
+pdm run python3 coat2pycsw.py
+```
+
+Run:
+```bash
+PYCSW_CONFIG=pycsw.conf pdm run python -m pycsw.wsgi
+```
+
+## With Docker
+
 ```bash
 docker compose up --build
 ```
