@@ -98,6 +98,12 @@ def main():
                     "individualname": dataset["author"],
                     "email": dataset["author_email"],
                 },
+                "distributor": {
+                    "individualname": "Francesco Frassinelli",
+                    "organisation": "NINA",
+                    "positionname": "Senior engineer IT",
+                    "url": "https://www.nina.no/english/Contact/Employees/Employee-info?AnsattID=15958",
+                },
             },
             "distribution": {
                 "waf": {
