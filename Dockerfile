@@ -11,7 +11,7 @@ COPY pyproject.toml pdm.lock .
 RUN pdm install --no-self --group prod
 
 COPY coat2pycsw.py pycsw.conf.template entrypoint.sh .
-COPY mappings/topics.yaml mappings/
+COPY mappings/topics.yaml mappings/tags.yaml mappings/
 ENV PYCSW_CONFIG=/app/pycsw.conf
 
 EXPOSE 8000/TCP

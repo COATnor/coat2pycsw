@@ -44,6 +44,14 @@ def coat2iso19115_topiccategory(category):
     return coat2iso19115_topiccategory_mapping.get(category, category)
 
 
+coat2gmd_earthscience_mapping = yaml.safe_load(open("mappings/tags.yaml"))
+
+
+def coat2gmd_earthscience_mapping(category):
+    """Compatibility workaround for old COAT tags values"""
+    return coat2gmd_earthscience_mapping.get(category, category)
+
+
 def normalize_datetime(timestamp):
     if not timestamp:
         return timestamp
