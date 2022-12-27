@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 from configparser import ConfigParser
@@ -5,6 +6,7 @@ from urllib.parse import urljoin
 
 import pycsw.core.config
 import requests
+import yaml
 from pycsw.core import admin, metadata, repository, util
 from pygeometa.core import read_mcf
 from pygeometa.schemas.iso19139 import ISO19139OutputSchema
@@ -34,32 +36,19 @@ def get_bbox(dataset):
     return shape(json.loads(extra["value"])).bounds
 
 
-coat2iso19115_topiccategory_mapping = {
-    "Biota": "biota",
-    "Boundaries": "boundaries",
-    "Climatology": "climatologyMeteorologyAtmosphere",
-    "Economy": "economy",
-    "Elevation": "elevation",
-    "Environment": "environment",
-    "Farming": "farming",
-    "Geoscientific": "geoscientificInformation",
-    "Health": "health",
-    "Imagery": "imageryBaseMapsEarthCover",
-    "Inland_Waters": "inlandWaters",
-    "Intelligence": "intelligenceMilitary",
-    "Location": "location",
-    "Oceans": "oceans",
-    "Planning": "planningCadastre",
-    "Society": "society",
-    "Structure": "structure",
-    "Transportation": "transportation",
-    "utilities": "utilitiesCommunication",
-}
+coat2iso19115_topiccategory_mapping = yaml.safe_load("mapping/topics.yaml")
 
 
 def coat2iso19115_topiccategory(category):
     """Compatibility workaround for old COAT topic category values"""
     return coat2iso19115_topiccategory_mapping.get(category, category)
+
+
+def normalize_datetime(timestamp):
+    if not timestamp:
+        return timestamp
+    parsed = datetime.datetime.fromisoformat(timestamp)
+    return parsed.strftime('%Y-%m-%dT%H:%M:%SZ')
 
 
 def main():
@@ -85,7 +74,7 @@ def main():
                 "identifier": dataset["id"],
                 "language": "en",
                 "charset": "utf8",
-                "datestamp": dataset["metadata_modified"],
+                "datestamp": normalize_datetime(dataset["metadata_modified"]),
                 "dataseturi": dataset_url,
             },
             "spatial": {"datatype": "vector", "geomtype": "point"},
@@ -95,7 +84,7 @@ def main():
                 "title": {"en": dataset["title"]},
                 "abstract": {"en": dataset["notes"]},
                 "edition": dataset["version"],
-                "dates": {"creation": dataset["metadata_created"]},
+                "dates": {"creation": normalize_datetime(dataset["metadata_created"])},
                 "keywords": {
                     "default": {
                         "keywords": {
@@ -110,8 +99,8 @@ def main():
                     "spatial": [{"bbox": get_bbox(dataset), "crs": 4326}],
                     "temporal": [
                         {
-                            "begin": dataset.get("temporal_start"),
-                            "end": dataset.get("temporal_end"),
+                            "begin": normalize_datetime(dataset.get("temporal_start")),
+                            "end": normalize_datetime(dataset.get("temporal_end")),
                         }
                     ],
                 },
