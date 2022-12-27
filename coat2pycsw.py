@@ -36,7 +36,7 @@ def get_bbox(dataset):
     return shape(json.loads(extra["value"])).bounds
 
 
-coat2iso19115_topiccategory_mapping = yaml.safe_load("mapping/topics.yaml")
+coat2iso19115_topiccategory_mapping = yaml.safe_load(open("mappings/topics.yaml"))
 
 
 def coat2iso19115_topiccategory(category):
