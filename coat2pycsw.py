@@ -106,6 +106,7 @@ def main():
                     ],
                 },
                 "fees": "None",
+                "uselimitation": dataset["license_id"].replace("_", "-"),
                 "accessconstraints": "otherRestrictions",
                 "rights": {
                     "en": dataset["resource_citations"],

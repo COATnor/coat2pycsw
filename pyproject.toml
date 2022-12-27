@@ -6,7 +6,8 @@ authors = [
     {name = "Francesco Frassinelli", email = "francesco.frassinelli@nina.no"},
 ]
 dependencies = [
-    "pygeometa>=0.13.1",
+    # https://github.com/geopython/pygeometa/issues/205
+    "pygeometa @ git+https://github.com/COATnor/pygeometa.git@add-uselimitation",
     "pycsw>=2.6.1",
     "setuptools>=65.6.0",
     "sqlalchemy>=1.4.44",
