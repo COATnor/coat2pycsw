@@ -48,7 +48,7 @@ def normalize_datetime(timestamp):
     if not timestamp:
         return timestamp
     parsed = datetime.datetime.fromisoformat(timestamp)
-    return parsed.strftime('%Y-%m-%dT%H:%M:%SZ')
+    return parsed.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def main():
@@ -66,6 +66,7 @@ def main():
 
     repo = repository.Repository(database, context, table=table_name)
 
+    # https://github.com/geopython/pygeometa/blob/0.13.1/pygeometa/schemas/iso19139/main.j2
     for dataset in get_datasets(URL):
         dataset_url = urljoin(URL, "dataset/" + dataset["name"] + "/")
         dataset_metadata = {
@@ -127,7 +128,7 @@ def main():
                 "CI_ResponsibleParty": {
                     "individualname": dataset["author"],
                     "email": dataset["author_email"],
-                }
+                },
             },
             "distribution": {
                 "en": {

@@ -36,3 +36,7 @@ docker compose up --build
 ```
 
 Configure by changing `PYCSW_URL` in `docker-compose.yml`, as well as the published port, if needed.
+
+# Test
+
+Perform a [GetRecords request](http://localhost:8000/?request=GetRecords&service=CSW&version=3.0.0&typeNames=gmd:MD_Metadata&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full).
