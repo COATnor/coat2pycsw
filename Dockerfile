@@ -16,6 +16,7 @@ COPY coat2pycsw.py pycsw.conf.template entrypoint.sh .
 COPY mappings/topics.yaml mappings/
 ENV PYCSW_CONFIG=/app/pycsw.conf
 ENV COAT_URL=https://data.coat.no/
+ENV TIMEOUT=300
 
 EXPOSE 8000/TCP
 ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
