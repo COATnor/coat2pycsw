@@ -12,7 +12,7 @@ from pygeometa.core import read_mcf
 from pygeometa.schemas.iso19139 import ISO19139OutputSchema
 from shapely.geometry import shape
 
-URL = os.getenv("COAT_URL", "https://data.coat.no/")
+URL = os.environ["COAT_URL"]
 
 
 def get_datasets(url):
