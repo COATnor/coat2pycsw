@@ -135,7 +135,7 @@ def main():
             "distribution": {
                 "en": {
                     "url": urljoin(dataset_url, "zip"),
-                    "type": "WWW:LINK",
+                    "type": "WWW:DOWNLOAD-1.0-http--download",
                     "rel": "canonical",
                     "name": 'ZIP-compressed dataset"' + dataset["name"] + '"',
                     "description": {
