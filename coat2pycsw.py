@@ -133,13 +133,23 @@ def main():
                 },
             },
             "distribution": {
-                "en": {
+                "landingpage": {
+                    "url": dataset_url,
+                    "type": "WWW:LINK-1.0-http--link",
+                    "rel": "canonical",
+                    "name": 'Landing page for dataset "' + dataset["name"] + '"',
+                    "description": {
+                        "en": 'Landing page for dataset "' + dataset["name"] + '"',
+                    },
+                    "function": "download",
+                },
+                "zip": {
                     "url": urljoin(dataset_url, "zip"),
                     "type": "WWW:DOWNLOAD-1.0-http--download",
                     "rel": "canonical",
-                    "name": 'ZIP-compressed dataset"' + dataset["name"] + '"',
+                    "name": 'ZIP-compressed dataset "' + dataset["name"] + '"',
                     "description": {
-                        "en": 'ZIP-compressed dataset"' + dataset["name"] + '"',
+                        "en": 'ZIP-compressed dataset "' + dataset["name"] + '"',
                     },
                     "function": "download",
                 }
