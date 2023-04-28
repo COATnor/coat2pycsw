@@ -12,7 +12,8 @@ from pygeometa.core import read_mcf
 from pygeometa.schemas.iso19139 import ISO19139OutputSchema
 from shapely.geometry import shape
 
-URL = os.environ["COAT_URL"]
+COAT_URL = os.environ["COAT_URL"]
+COAT_PUBLIC_URL = os.getenv("COAT_PUBLIC_URL", COAT_URL)
 
 
 def get_datasets(url):
@@ -67,8 +68,8 @@ def main():
     repo = repository.Repository(database, context, table=table_name)
 
     # https://github.com/geopython/pygeometa/blob/0.13.1/pygeometa/schemas/iso19139/main.j2
-    for dataset in get_datasets(URL):
-        dataset_url = urljoin(URL, "dataset/" + dataset["name"] + "/")
+    for dataset in get_datasets(COAT_URL):
+        dataset_url = urljoin(COAT_PUBLIC_URL, "dataset/" + dataset["name"] + "/")
         dataset_metadata = {
             "mcf": {"version": 1.0},
             "metadata": {
