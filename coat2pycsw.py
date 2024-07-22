@@ -69,7 +69,7 @@ def main():
 
     # https://github.com/geopython/pygeometa/blob/0.13.1/pygeometa/schemas/iso19139/main.j2
     for dataset in get_datasets(COAT_URL):
-        dataset_url = urljoin(COAT_PUBLIC_URL, "dataset/" + dataset["name"] + "/")
+        dataset_url = urljoin(COAT_PUBLIC_URL, "dataset/" + dataset["name"])
         dataset_metadata = {
             "mcf": {"version": 1.0},
             "metadata": {
